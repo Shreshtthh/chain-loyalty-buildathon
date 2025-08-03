@@ -1,36 +1,49 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "./LoyaltyReward.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/**
- * @title LoyaltyPoints
- * @dev This is the core smart contract for the Chain-Loyalty project.
- * It creates a standard ERC-20 token named "Loyalty Token" (LOYAL).
- * It includes a special 'mint' function that can only be called by the contract owner.
- * This ensures that only our official partner stores (simulated via our admin panel)
- * can create and distribute new loyalty points to users.
- */
 contract LoyaltyPoints is ERC20, Ownable {
-    /**
-     * @dev Sets the initial values for the token and transfers ownership to the deployer.
-     * The ERC20 constructor is called with the token's name and symbol.
-     * The Ownable constructor is called with the initial owner's address (msg.sender).
-     */
+    // State variable to hold the address of the NFT reward contract
+    LoyaltyReward public loyaltyRewardContract;
+
     constructor() ERC20("Loyalty Token", "LOYAL") Ownable(msg.sender) {
-        // The contract is initialized with 0 tokens.
-        // Points are only created when the owner calls the mint function.
+        // The constructor's main job is to set up the parent contracts.
     }
 
     /**
      * @dev Creates a specified `amount` of new tokens and assigns them to the `to` address.
-     *
-     * Requirements:
-     * - This function can only be called by the contract owner (see the 'onlyOwner' modifier).
-     * This is the central security mechanism for our rewards system.
+     * Can only be called by the contract owner.
      */
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
+    }
+
+    /**
+     * @dev Sets the address of the LoyaltyReward NFT contract.
+     * Can only be called once by the contract owner.
+     */
+    function setRewardContract(address rewardContractAddress) public onlyOwner {
+        loyaltyRewardContract = LoyaltyReward(rewardContractAddress);
+    }
+
+    /**
+     * @dev Allows a user to burn a `requiredAmount` of their loyalty points
+     * in exchange for one LoyaltyReward NFT.
+     */
+    function redeemForNft(uint256 requiredAmount) public {
+        // Check if the reward contract has been set
+        require(address(loyaltyRewardContract) != address(0), "Reward contract not set");
+        
+        // Check if the user has enough points
+        require(balanceOf(msg.sender) >= requiredAmount, "Insufficient loyalty points");
+        
+        // Burn the user's points
+        _burn(msg.sender, requiredAmount);
+        
+        // Tell the NFT contract to mint a reward to the user
+        loyaltyRewardContract.safeMint(msg.sender);
     }
 }
