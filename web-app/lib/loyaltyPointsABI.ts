@@ -262,6 +262,19 @@ export const loyaltyPointsABI = [
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "loyaltyRewardContract",
+      "outputs": [
+        {
+          "internalType": "contract LoyaltyReward",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -306,8 +319,34 @@ export const loyaltyPointsABI = [
       "type": "function"
     },
     {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "requiredAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "redeemForNft",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [],
       "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "rewardContractAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setRewardContract",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
