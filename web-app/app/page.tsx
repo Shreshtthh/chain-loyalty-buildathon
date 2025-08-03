@@ -1,19 +1,40 @@
 // web-app/app/page.tsx
 'use client';
-import { useAccount, useBalance } from 'wagmi';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
-import { formatEther } from 'viem';
+import { useAccount, useBalance, useWriteContract } from 'wagmi';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from '@/components/ui/button';
+import { formatEther, parseEther } from 'viem';
+import { loyaltyPointsABI } from '@/lib/loyaltyPointsABI';
 
-// IMPORTANT: Replace this with your actual deployed contract address
-const LOYALTY_CONTRACT_ADDRESS = '0x075944f63b060a2a18f38382220a8d8e150c1810';
+
+const LOYALTY_CONTRACT_ADDRESS = '0xb3ef80eddc7b9ab9318678dc75323df5cc16a579';
 
 export default function HomePage() {
   const { address, isConnected } = useAccount();
-
-  const { data: balance, isLoading } = useBalance({
+  const { data: balance, isLoading, refetch } = useBalance({
     address: address,
     token: LOYALTY_CONTRACT_ADDRESS,
   });
+
+  const { writeContract, isPending, data: hash } = useWriteContract();
+
+  async function handleRedeem() {
+    writeContract({
+      address: LOYALTY_CONTRACT_ADDRESS,
+      abi: loyaltyPointsABI,
+      functionName: 'redeemForNft',
+      args: [parseEther('1000')], // Cost of the NFT is 1000 points
+    }, {
+      onSuccess: async (data) => {
+        alert("Redemption successful! Transaction: " + data);
+        // Refetch the balance after a successful transaction
+        refetch();
+      },
+      onError: (error) => {
+        alert("Redemption failed: " + error.message);
+      }
+    });
+  }
 
   if (!isConnected) {
     return (
@@ -49,10 +70,15 @@ export default function HomePage() {
             <CardTitle>Available Rewards</CardTitle>
             <CardDescription>Use your points to claim cool stuff!</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <p>1000 LOYAL - 10% Discount NFT</p>
-            <p>5000 LOYAL - Special Edition T-Shirt NFT</p>
-            <p className="text-sm text-gray-500 pt-2">(Redemption coming soon!)</p>
+          <CardContent className="space-y-4">
+            <div>
+              <p className='font-semibold'>Loyalty Club Membership NFT</p>
+              <p className='text-sm text-gray-600'>Redeem for 1000 LOYAL</p>
+            </div>
+            <Button onClick={handleRedeem} disabled={isPending}>
+              {isPending ? "Confirm in wallet..." : "Redeem Now"}
+            </Button>
+            {hash && <div className="text-sm text-green-600 break-words">Success! Tx: {hash}</div>}
           </CardContent>
         </Card>
       </div>

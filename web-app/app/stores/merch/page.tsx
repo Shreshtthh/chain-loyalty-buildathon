@@ -2,6 +2,7 @@
 'use client';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function MerchStorePage() {
   function handleBuy() {
@@ -12,17 +13,21 @@ export default function MerchStorePage() {
     <div className="max-w-sm mx-auto">
       <Card>
         <CardHeader>
-          {/* CHANGE THIS */}
           <CardTitle>Web3 Wearables</CardTitle>
-          {/* AND THIS */}
           <CardDescription>On-chain apparel for the discerning degen.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="w-full h-48 bg-gray-200 rounded-md flex items-center justify-center font-semibold text-gray-500">
-             {/* AND THIS */}
-             Image of an NFT T-Shirt
+          
+          <div className="w-full h-48 relative">
+            <Image
+              src="/tshirt.png" 
+              alt="A stylish Web3 t-shirt"
+              layout="fill"
+              objectFit="contain" // Changed to "contain" to prevent cropping
+              className="rounded-md"
+            />
           </div>
-          {/* AND THIS */}
+          
           <Button onClick={handleBuy} className="w-full">Buy for 0.01 ETH</Button>
         </CardContent>
       </Card>

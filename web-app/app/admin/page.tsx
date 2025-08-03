@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../..
 import { parseEther } from 'viem';
 
 // IMPORTANT: Replace this with your actual deployed contract address
-const LOYALTY_CONTRACT_ADDRESS = '0x075944f63b060a2a18f38382220a8d8e150c1810';
+const LOYALTY_CONTRACT_ADDRESS = '0xb3ef80eddc7b9ab9318678dc75323df5cc16a579';
 
 export default function AdminPage() {
   const { address, isConnected } = useAccount();
