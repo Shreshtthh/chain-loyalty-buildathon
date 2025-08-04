@@ -10,11 +10,11 @@ import { Label } from "../../components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../../components/ui/card";
 import { parseEther } from 'viem';
 
-// IMPORTANT: Replace this with your actual deployed contract address
-const LOYALTY_CONTRACT_ADDRESS = '0xb3ef80eddc7b9ab9318678dc75323df5cc16a579';
+
+const LOYALTY_CONTRACT_ADDRESS = '0x11e3febc05cca9b1ce88787b91bbbd18ddfafd0a';
 
 export default function AdminPage() {
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
   const [toAddress, setToAddress] = useState('');
   const [amount, setAmount] = useState('');
   
