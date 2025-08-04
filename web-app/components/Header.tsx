@@ -10,10 +10,16 @@ export function Header() {
         <Link href="/" className="text-2xl font-bold text-gray-800">
           Chain<span className="text-blue-600">Loyalty</span>
         </Link>
+        
+        
         <nav className="flex items-center space-x-6 text-lg">
+          <Link href="/staking" className="hover:text-blue-600">Staking</Link>
+          <Link href="/partners" className="hover:text-blue-600">For Partners</Link>
           <Link href="/stores/coffee" className="hover:text-blue-600">Coffee Shop</Link>
           <Link href="/stores/merch" className="hover:text-blue-600">Merch Store</Link>
         </nav>
+       
+
         <ConnectButton />
       </div>
     </header>

@@ -7,7 +7,7 @@ import { formatEther, parseEther } from 'viem';
 import { loyaltyPointsABI } from '@/lib/loyaltyPointsABI';
 
 
-const LOYALTY_CONTRACT_ADDRESS = '0xb3ef80eddc7b9ab9318678dc75323df5cc16a579';
+const LOYALTY_CONTRACT_ADDRESS = '0x11e3febc05cca9b1ce88787b91bbbd18ddfafd0a';
 
 export default function HomePage() {
   const { address, isConnected } = useAccount();
