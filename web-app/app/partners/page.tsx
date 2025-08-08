@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useWriteContract, useAccount } from "wagmi";
 import { partnerRegistryABI } from "@/lib/partnerRegistryABI";
+import { parseEther } from "viem"; 
 
 
 const PARTNER_REGISTRY_ADDRESS = '0xa66fed2dfdef58bcb3ec90c94b642dae983f6851';
@@ -16,6 +17,9 @@ export default function PartnerPage() {
             address: PARTNER_REGISTRY_ADDRESS,
             abi: partnerRegistryABI,
             functionName: 'register',
+            
+            value: parseEther('0.1'),
+           
         });
     }
 
@@ -30,9 +34,9 @@ export default function PartnerPage() {
                 <CardDescription>Join the Chain-Loyalty network to start rewarding your users.</CardDescription>
             </CardHeader>
             <CardContent>
-                <p className="mb-4">By registering, your contract will be granted the Minter Role, allowing you to distribute LOYAL tokens.</p>
+                <p className="mb-4">By registering, your contract will be granted the Minter Role. A one-time 0.1 ETH registration fee is required.</p>
                 <Button onClick={handleRegister} disabled={isPending}>
-                    {isPending ? "Confirm in wallet..." : "Register as a Partner"}
+                    {isPending ? "Confirm in wallet..." : "Register as a Partner (0.1 ETH)"}
                 </Button>
                 {hash && <div className="text-sm text-green-600 break-words mt-4">Success! Tx: {hash}</div>}
             </CardContent>
