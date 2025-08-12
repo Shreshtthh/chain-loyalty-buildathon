@@ -1,139 +1,110 @@
-<div align="center">
-  <br />
-  <h1>⛓️ Chain-Loyalty</h1>
-  <p><b>A Universal Rewards & Staking Ecosystem on the Morph Network</b></p>
-  <p>Submission for the Morph Consumer Buildathon 2025</p>
-  <br />
-</div>
+# ⛓ Chain-Loyalty Protocol
+**A decentralized and permissionless "Loyalty as a Service" (LaaS) protocol for the Morph ecosystem.**
 
-> Chain-Loyalty introduces a decentralized, universal loyalty program designed to create a unified rewards ecosystem. It provides a central hub for consumers to earn, manage, and stake their points from any participating dApp on Morph, turning scattered rewards into a valuable, consolidated asset.
+*Submission for the Morph Consumer Buildathon on DoraHacks.*
+
+![Morph](https://img.shields.io/badge/Built%20on-Morph-purple)
+![Solidity](https://img.shields.io/badge/Solidity-0.8.20-blue)
 
 ---
 
-## 🚀 Live Demo & Video
+##  Demo & Live Links
 
-- **Live dApp:** `[Link to your deployed Vercel site]`
-- **Video Walkthrough:** `[Link to your Loom or YouTube demo video]`
-
----
-
-## 🎯 The Problem
-
-In the current Web3 landscape, consumer rewards are fragmented. Loyalty points are siloed within individual dApps, offering little cumulative value to the user. For businesses and developers building on new chains like Morph, attracting and retaining users is a constant challenge without powerful, built-in incentive mechanisms. This fragmentation creates a poor user experience and hinders the growth of a vibrant on-chain economy.
-
-## ✨ Our Solution: An Ecosystem Flywheel
-
-Chain-Loyalty solves this by creating a powerful, self-reinforcing ecosystem loop:
-
-1.  **Consumers** are incentivized to shop at partner stores to earn universal `LOYAL` tokens.
-2.  **Consumers** stake their `LOYAL` tokens in the Staking Vault to unlock reward multipliers and benefits.
-3.  **Partners** gain a powerful, built-in tool to drive user engagement and retention, attracting more customers to their dApps.
-4.  **The Morph Network** benefits from increased transaction volume and a sticky, interconnected ecosystem of applications.
-
-This isn't just a dApp; it's foundational infrastructure for consumer-grade applications on Morph.
+* **Live dApp URL:** [Chain-Loyalty](https://chain-loyalty-buildathon.vercel.app/)
+* **Video Walkthrough:** `[Youtube Video Soon]`
 
 ---
 
-## 🔑 Key Features
+## The Problem
 
--   **Universal Rewards Hub:** A central dashboard for users to connect their wallet, view their aggregated `LOYAL` token balance, and manage their rewards.
--   **Decentralized Partner Registry:** An on-chain system where businesses can pay a one-time fee to become official partners. This automatically grants them the `MINTER_ROLE` and a weekly allowance of `LOYAL` tokens to distribute to their customers.
--   **Tiered Staking Vault:** A sophisticated staking contract where users can lock their `LOYAL` tokens to climb through tiers (Bronze, Silver, Gold), each offering a progressively higher reward multiplier on future earnings.
--   **Role-Based Minting Control:** Utilizes OpenZeppelin's `AccessControl` for robust security. Only the contract owner (for admin purposes) and registered partners (with weekly limits) can mint new tokens, preventing inflation and abuse.
--   **Admin Superpowers:** A secure admin panel, accessible only by the contract owner, for emergency token minting and system management.
--   **Automated Deployment & Configuration:** A robust Hardhat script that deploys all contracts, links them, and correctly sets all necessary roles and permissions in a single command.
+New blockchain ecosystems like Morph face a cold start problem. How do you incentivize users to stay and dApps to build?
 
----
+* **For dApp Developers (like Ben):** Ben is building a DeFi app on Morph. He wants to reward his most loyal users but lacks the time and deep Solidity expertise to create a secure, engaging, and multi-faceted loyalty system from scratch.
+* **For Users (like Priya):** Priya is a new Morph user. Her on-chain activity is fragmented. Her loyalty to the apps she uses is unrewarded and siloed, giving her little reason to stick with one dApp over another.
 
-## 🏗️ Architecture & How It Works
-
-The Chain-Loyalty ecosystem is powered by a suite of interconnected smart contracts working in harmony.
-
-
-
-1.  **`LoyaltyPoints.sol` (ERC-20 Token):** The core of the ecosystem. It's an `AccessControl` ERC-20 token that manages all balances, roles (`DEFAULT_ADMIN_ROLE`, `MINTER_ROLE`), and weekly minting allowances for partners.
-2.  **`PartnerRegistry.sol` (Onboarding):** The gateway for businesses. This contract handles partner registration, fee collection, and automatically calls `LoyaltyPoints` to grant the `MINTER_ROLE` and set the initial minting allowance.
-3.  **`StakingVault.sol` (DeFi Engine):** The user-facing DeFi component. It securely holds staked tokens and calculates a user's reward multiplier based on their staked amount and the defined tiers. It requires the standard `approve` and `stake` flow for security.
-4.  **Frontend (Next.js & wagmi):** A polished, responsive user interface that provides a seamless experience for all user actions, including checking balances, registering, staking, and unstaking.
+Chain-Loyalty solves both of their problems with a single, open protocol.
 
 ---
 
-## 💜 Why Morph?
+## Our Solution: Loyalty as a Service
 
-Morph is the ideal platform for Chain-Loyalty, transforming it from a theoretical concept into a viable, high-performance application.
+Chain-Loyalty is a suite of smart contracts that provides any developer on Morph the tools to launch a sophisticated, on-chain loyalty program in minutes, without writing a single line of Solidity.
 
--   **Low Gas Fees:** A loyalty program involves millions of potential micro-transactions (earning points, redeeming rewards, staking). Morph's low fees make these actions economically feasible for everyday users.
--   **Fast Transaction Finality:** A seamless consumer experience requires instant gratification. Morph's speed ensures users see their rewards appear immediately after a purchase, making the system feel as responsive as a traditional Web2 application.
--   **EVM Compatibility:** Allowed for rapid development, testing, and deployment using familiar, industry-standard tools like Hardhat, Viem, and Solidity, drastically accelerating the development lifecycle.
+* **For Ben (The Developer):** He can use our self-service Partner Portal to register his dApp, pay a small registration fee, and immediately gain the ability to mint and distribute `$LOYAL` reward tokens to his users.
+* **For Priya (The Consumer):** She can earn `$LOYAL` tokens from all participating partner dApps, stake her tokens for reward multipliers, and redeem them for exclusive, on-chain NFT assets, turning her loyalty into something she truly owns.
 
----
 
-## 🛠️ Tech Stack
-
-**Blockchain:**
--   Solidity
--   Hardhat
--   OpenZeppelin Contracts
--   Viem
-
-**Frontend:**
--   Next.js
--   React
--   TypeScript
--   wagmi
--   Tailwind CSS
--   shadcn/ui
-
-**Deployment & Infrastructure:**
--   Vercel
--   Morph Sepolia Testnet
 
 ---
 
-## 🏁 Getting Started (For Developers)
+##  Architecture Overview
 
-To get a local copy up and running, follow these simple steps.
+The protocol operates through a simple, four-step flow:
 
-1.  **Clone the repo**
-    ```sh
-    git clone [https://github.com/your-username/chain-loyalty.git](https://github.com/your-username/chain-loyalty.git)
+1.  **Partner Registration:** `PartnerRegistry.sol` → New dApps pay a fee to register and are granted a `MINTER_ROLE`.
+2.  **Token Distribution:** `LoyaltyPoints.sol` → Registered partners can mint `$LOYAL` tokens to their users as rewards.
+3.  **Staking & Tiers:** `StakingVault.sol` → Users stake their `$LOYAL` tokens to unlock reward multipliers across the ecosystem.
+4.  **NFT Redemption:** `LoyaltyReward.sol` → Users burn their `$LOYAL` tokens to redeem exclusive NFT assets, completing the economic loop.
+
+---
+
+##  Scalability
+
+Built specifically for Morph's high-throughput, low-cost environment:
+
+* **Optimized Gas Usage:** The protocol utilizes a role-based permission system (`AccessControl`) which is more gas-efficient for the frequent minting operations required in a loyalty system.
+* **Event-Driven Architecture:** The smart contracts emit events for all major actions (mints, stakes, redemptions), allowing for efficient off-chain indexing and data aggregation for features like the partner analytics dashboard.
+
+---
+
+##  Tokenomics & Sustainability
+
+* **Partner Registration Fees:** The `0.1 ETH` fee required for new partners to join the network directly funds ongoing protocol development and maintenance.
+* **Network Effects:** As more partners join, the utility of the `$LOYAL` token increases for all users, creating a powerful network effect that attracts more users and, in turn, more partners.
+
+---
+
+## Competitive Advantage
+
+* **vs. Web2 Loyalty (e.g., Airline Miles):** Chain-Loyalty gives users **true ownership** of their rewards as on-chain assets (ERC20s and NFTs), which are interoperable and can be traded on open markets.
+* **vs. Web3 Task Platforms (e.g., Galxe):** While excellent for one-off airdrop tasks, Chain-Loyalty is designed for **deep, ongoing e-commerce and DeFi loyalty**, creating sustainable, long-term user retention for dApps.
+
+---
+
+##  Future Vision
+
+* **DAO Governance:** Empowering `$LOYAL` token holders to vote on key protocol parameters like registration fees and new reward tiers.
+* **Cross-Chain Loyalty Bridge:** Expanding the protocol to other L2s, allowing for a truly interoperable rewards experience across Web3.
+* **AI-Powered Recommendations:** An engine that suggests to users the most efficient way to earn points for a reward they want, based on their on-chain behavior.
+
+---
+
+##  Deployed Contracts (Morph Testnet)
+
+* **LoyaltyPoints:** `[x000b045753c128b4f209f03f4301d69a6869639a]`
+* **LoyaltyReward:** `[0x987b230af8316ec294b23445b90986a66a9612ad]`
+* **StakingVault:** `[0x58bbfd4711baf127c106e91cb55810f5453e3d54]`
+* **PartnerRegistry:** `[0xc3bd3beef6e621cdea9ed1c0e14081688e7fdff0]`
+
+---
+
+##  Getting Started
+
+### Prerequisites
+* Node.js v18+
+* MetaMask browser extension
+
+### Quick Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [YOUR_GITHUB_REPO_URL]
     cd chain-loyalty
     ```
-2.  **Install dependencies for both workspaces**
-    ```sh
-    # In the root directory
-    npm install
-    # In the contracts directory
-    cd contracts && npm install && cd ..
-    # In the web-app directory
-    cd web-app && npm install && cd ..
+2.  **Install dependencies:**
+    * For contracts: `cd contracts && npm install`
+    * For the web app: `cd ../web-app && npm install`
+3.  **Run the dApp locally:**
+    ```bash
+    cd web-app && npm run dev
     ```
-3.  **Set up your environment variables**
-    -   In the `contracts` directory, create a `.env` file.
-    -   Add your `PRIVATE_KEY` and `MORPH_SEPOLIA_RPC_URL`.
-4.  **Deploy the contracts to the Morph testnet**
-    ```sh
-    cd contracts
-    npx hardhat run scripts/deploy.ts --network morphSepolia
-    ```
-    This script will automatically deploy all contracts, set permissions, and update the address file for the frontend.
-5.  **Run the frontend**
-    ```sh
-    cd web-app
-    npm run dev
-    ```
-
----
-
-## 🛣️ Future Work & Roadmap
-
--   [ ] **Governance:** Allow holders of staked `LOYAL` tokens to vote on proposals, such as changing the partner registration fee or adding new staking tiers.
--   [ ] **Dynamic Rewards:** Implement an NFT-based reward system where partners can mint unique NFT vouchers that users can redeem.
--   [ ] **Partner Analytics Dashboard:** Provide a dedicated dashboard for registered partners to track how many tokens they've distributed and see user engagement metrics.
--   [ ] **Social Features:** Enable users to send `LOYAL` tokens as tips or gifts to friends.
-
----
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
