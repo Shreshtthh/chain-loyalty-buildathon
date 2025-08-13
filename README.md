@@ -81,7 +81,7 @@ Built specifically for Morph's high-throughput, low-cost environment:
 
 ##  Deployed Contracts (Morph Testnet)
 
-* **LoyaltyPoints:** `[x000b045753c128b4f209f03f4301d69a6869639a]`
+* **LoyaltyPoints:** `[0x000b045753c128b4f209f03f4301d69a6869639a]`
 * **LoyaltyReward:** `[0x987b230af8316ec294b23445b90986a66a9612ad]`
 * **StakingVault:** `[0x58bbfd4711baf127c106e91cb55810f5453e3d54]`
 * **PartnerRegistry:** `[0xc3bd3beef6e621cdea9ed1c0e14081688e7fdff0]`
