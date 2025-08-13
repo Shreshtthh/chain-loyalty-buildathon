@@ -98,7 +98,7 @@ Built specifically for Morph's high-throughput, low-cost environment:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/Shreshtthh/chain-loyalty-buildathon/]
+    git clone https://github.com/Shreshtthh/chain-loyalty-buildathon/
     cd chain-loyalty
     ```
 2.  **Install dependencies:**
