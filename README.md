@@ -11,7 +11,7 @@
 ##  Demo & Live Links
 
 * **Live dApp URL:** [Chain-Loyalty](https://chain-loyalty-buildathon.vercel.app/)
-* **Video Walkthrough:** [[Morph's Consumer Buildathon](https://www.youtube.com/watch?v=lQLeAu6YWjU)]
+* **Video Walkthrough:** Morph's Consumer Buildathon (https://www.youtube.com/watch?v=lQLeAu6YWjU)
 
 ---
 
